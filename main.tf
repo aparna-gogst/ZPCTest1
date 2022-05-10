@@ -153,21 +153,6 @@ resource "aws_security_group" "km_ecs_sg" {
   })
 }
 
-resource "aws_lb" "km_lb" {
-  name            = "km-lb-${var.environment}"
-  subnets         = aws_subnet.km_public_subnet.*.id
-  security_groups = [aws_security_group.km_alb_sg.id]
-}
-
-resource "aws_lb_target_group" "km_lb_target" {
-  name        = "km-lb-target-group-${var.environment}"
-  port        = 80
-  protocol    = "HTTP"
-  vpc_id      = aws_vpc.km_vpc.id
-  target_type = "ip"
-  depends_on = [ aws_lb.km_lb ]
-}
-
 # Redirect all traffic from the ALB to the target group
 resource "aws_lb_listener" "km_frontend_listener" {
   load_balancer_arn = aws_lb.km_lb.arn
