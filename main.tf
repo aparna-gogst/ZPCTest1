@@ -102,10 +102,6 @@ resource "aws_ssm_parameter" "km_ssm_db_name" {
 }
 
 
-resource "aws_s3_bucket" "km_public_blob" {
-  bucket = "km-public-blob"
-}
-
 resource "aws_s3_bucket_public_access_block" "km_public_blob" {
   bucket = aws_s3_bucket.km_public_blob.id
 
