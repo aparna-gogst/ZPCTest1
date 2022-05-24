@@ -81,25 +81,6 @@ resource "aws_ssm_parameter" "km_ssm_db_password" {
   tags = merge(var.default_tags, {})
 }
 
-resource "aws_ssm_parameter" "km_ssm_db_user" {
-  name        = "/km-${var.environment}/DB_USER"
-  description = "Kai Monkey Database Username"
-  type        = "SecureString"
-  value       = aws_db_instance.km_db.username
-
-  tags = merge(var.default_tags, {})
-}
-
-resource "aws_ssm_parameter" "km_ssm_db_name" {
-  name        = "/km-${var.environment}/DB_NAME"
-  description = "Kai Monkey Database Name"
-  type        = "SecureString"
-  value       = aws_db_instance.km_db.name
-
-  tags = merge(var.default_tags, {
-    environment = "${var.environment}"
-  })
-}
 
 
 resource "aws_s3_bucket_public_access_block" "km_public_blob" {
